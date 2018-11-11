@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user #auto converts to route for user profile
+      redirect_back_or user
+      #redirect_to user #auto converts to route for user profile
     else
       # Create an error message: .now vs flash[:errors]:
       #contents of flash.now disappear as soon as there is an additional request
