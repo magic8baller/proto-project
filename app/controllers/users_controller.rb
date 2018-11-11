@@ -6,8 +6,14 @@ class UsersController < ApplicationController
   end
 
   def create
-       @user = User.create(user_params)
-
+    @user = User.create(user_params)
+    if @user.valid?
+      log_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
 
